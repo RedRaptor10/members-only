@@ -87,6 +87,7 @@ exports.logIn = [
 ];
 
 exports.logOut = (req, res) => {
+    const delay = 5;
     req.logout();
-    res.redirect('/');
+    res.render('logOut', { title: 'Log Out', delay: delay, message: 'You have been successfully logged out. You will be redirected in ' + delay + ' seconds.' });
 }

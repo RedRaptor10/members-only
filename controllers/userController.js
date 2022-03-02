@@ -32,10 +32,10 @@ exports.signUp = [
             res.render('signUp', { title: 'Sign Up', formData: user, errors: errors.array() });
         } else {
             // Check if username already exists
-            User.find({'username': user.username})
+            User.findOne({'username': user.username})
             .exec(function(err, results) {
                 if (err) { return next(err); }
-                else if (results.length > 0) {
+                else if (results) {
                     // Username exists, render form again
                     res.render('signUp', { title: 'Sign Up', formData: user,
                         errors: [{ msg: 'Username already exists.'}] });
@@ -48,8 +48,8 @@ exports.signUp = [
                         // Save user info to database
                         user.save(function(err) {
                             if (err) { return next(err); }
-                            // Success. Redirect to home page
-                            res.redirect('/');
+                            // Success. Render sign up page with account created
+                            res.render('signUp', { title: 'Sign Up', accountCreated: true });
                         });
                     });
                 }

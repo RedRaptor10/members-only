@@ -20,6 +20,9 @@ block content
   div#posts
     each post in posts
       div.post
-        div #{post.title} by #{post.author.username}
+        div #{post.title}
+          if user && user.status=='Avenger'
+            |  by #{post.author.username}
         div #{post.message}
-        div #{post.date}
+        if user && user.status=='Avenger'
+          div #{post.dateFormatted}

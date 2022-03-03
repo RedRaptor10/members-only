@@ -6,7 +6,8 @@ var UserSchema = new Schema({
     password: { type: String, minLength: 5, required: true },
     firstName: { type: String, maxLength: 20 },
     lastName: { type: String, maxLength: 20 },
-    status: { type: String, required: true }
+    status: { type: String, required: true },
+    admin: { type: Boolean }
 });
 
 UserSchema

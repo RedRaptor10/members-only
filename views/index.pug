@@ -5,9 +5,11 @@ block content
   p Welcome to #{title}
 
   if user
-    p Logged in
     p Username: #{user.username}
     p Status: #{user.status}
+    if user.admin && user.admin==true
+      p Admin
+
     if user.status=='Member'
       a(href='/join')
         button Join
@@ -16,6 +18,12 @@ block content
         button Leave
       a(href='/create-post')
         button Create Post
+    if !user.admin || user.admin==false
+      a(href='/set-admin')
+        button Become an Admin
+    else if user.admin && user.admin==true
+      a(href='/unset-admin')
+        button Revoke Admin
 
   div#posts
     each post in posts

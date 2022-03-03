@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  if !user
+    p You are not logged in.
+  else if user.admin && user.admin=='Admin' && !message
+    p You are already an admin.
+  else if message
+    p= message
+    script.
+      setTimeout(function() {
+        window.location = '/';
+      }, #{delay} * 1000);
+  else
+    form(action="" method="POST")
+      label Do you really want to revoke Admin privileges?
+      button(type="submit") Revoke
+
+    if errors
+      ul
+        for error in errors
+          li!= error.msg

@@ -10,6 +10,18 @@ router.get('/', postController.index);
 
 // User Controller
 
+// Set Admin
+router.get('/set-admin', function(req, res) {
+  res.render('setAdmin', { title: 'Become an Admin', user: req.user });
+});
+router.post('/set-admin', userController.setAdmin);
+
+// Unset Admin
+router.get('/unset-admin', function(req, res) {
+  res.render('unsetAdmin', { title: 'Revoke Admin', user: req.user });
+});
+router.post('/unset-admin', userController.unsetAdmin);
+
 // Sign Up Form
 router.get('/sign-up', function(req, res) {
   res.render('signUp', { title: 'Sign Up', user: req.user });

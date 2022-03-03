@@ -139,3 +139,44 @@ exports.leave = [
         });
     }
 ];
+
+// Set Admin
+exports.setAdmin = [
+    // Validate and sanitize fields
+    body('password', 'Password required.').trim().isLength({ min: 1 }).escape(),
+
+    // Process Set Admin
+    (req, res, next) => {
+        // Extract the validation errors from request
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            // Error, render form again with sanitized values/error messages
+            res.render('setAdmin', { title: 'Become an Admin', user: req.user, errors: errors.array() });
+        } else if (req.body.password != nconf.get('ADMIN_PASSWORD')) {
+            res.render('setAdmin', { title: 'Become an Admin', user: req.user, errors: [{ msg: 'Incorrect password.' }] });
+        } else {
+            const delay = 5;
+            User.updateOne({"username": req.user.username}, {"$set": {"admin": true}})
+            .exec(function(err) {
+                if (err) { return next(err); }
+                res.render('setAdmin', { title: 'Become an Admin', user: req.user, delay: 5,
+                    message: 'You are now an admin. You will be redirected in ' + delay + ' seconds.' });
+            });
+        }
+    }
+];
+
+// Unset Admin
+exports.unsetAdmin = [
+    // Process Unset Admin
+    (req, res, next) => {
+        const delay = 5;
+        User.updateOne({"username": req.user.username}, {"$set": {"admin": false}})
+        .exec(function(err) {
+            if (err) { return next(err); }
+            res.render('unsetAdmin', { title: 'Revoke Admin', user: req.user, delay: 5,
+                message: 'You are no longer an admin. You will be redirected in ' + delay + ' seconds.' });
+        });
+    }
+];

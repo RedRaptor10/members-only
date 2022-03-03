@@ -6,3 +6,8 @@ block content
 
   if user
     p Logged in
+    p Username: #{user.username}
+    p Status: #{user.status}
+    if user.status=='Member'
+      a(href='/join')
+        button Join

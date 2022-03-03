@@ -68,19 +68,23 @@ exports.logIn = [
         // Extract the validation errors from request
         const errors = validationResult(req);
 
-        // Create new User object
-        const user = new User({
-            username: req.body.username,
-            password: req.body.password,
-        });
-
         if (!errors.isEmpty()) {
             // Error, render form again with sanitized values/error messages
-            res.render('logIn', { title: 'Log In', formData: user, errors: errors.array() });
+            res.render('logIn', { title: 'Log In', formData: { username: req.body.username }, errors: errors.array() });
         } else {
-            passport.authenticate('local', {
-                successRedirect: '/',
-                failureRedirect: '/log-in'
+            passport.authenticate('local', function(err, user, info) {
+                //successRedirect: '/',
+                //failureRedirect: '/log-in'
+                if (err) { return next(err); }
+                // Incorrect username and/or password. Render form again
+                if (!user) { return res.render('logIn', { title: 'Log In', formData: { username: req.body.username },
+                    errors: [{ msg: info.message }] }) }
+
+                // Success. Log in & redirect to homepage
+                req.login(user, function(err) {
+                    if (err) { return next(err); }
+                    res.redirect('/');
+                });
             })(req, res, next); // passport.authenticate() is a middleware, must invoke function with (req, res, next)
         }
     }

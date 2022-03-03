@@ -115,11 +115,27 @@ exports.join = [
         } else if (req.body.password != nconf.get('MEMBERS_PASSWORD')) {
             res.render('join', { title: 'Join', user: req.user, errors: [{ msg: 'Incorrect password.' }] });
         } else {
+            const delay = 5;
             User.updateOne({"username": req.user.username}, {"$set": {"status": "Avenger"}})
             .exec(function(err) {
                 if (err) { return next(err); }
-                res.render('join', { title: 'Join', user: req.user, joined: true });
+                res.render('join', { title: 'Join', user: req.user, delay: 5,
+                    message: 'You have joined the Avengers. You will be redirected in ' + delay + ' seconds.' });
             });
         }
+    }
+];
+
+// Leave
+exports.leave = [
+    // Process Leave
+    (req, res, next) => {
+        const delay = 5;
+        User.updateOne({"username": req.user.username}, {"$set": {"status": "Member"}})
+        .exec(function(err) {
+            if (err) { return next(err); }
+            res.render('leave', { title: 'Leave', user: req.user, delay: 5,
+                message: 'You have left the Avengers. You will be redirected in ' + delay + ' seconds.' });
+        });
     }
 ];

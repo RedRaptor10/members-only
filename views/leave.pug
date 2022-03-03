@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  if !user
+    p You are not logged in.
+  else if user.status=='Member' && !message
+    p You are already a Member.
+  else if message
+    p= message
+    script.
+      setTimeout(function() {
+        window.location = '/';
+      }, #{delay} * 1000);
+  else
+    form(action="" method="POST")
+      label Do you really want to leave the Avengers?
+      button(type="submit") Leave
+
+    if errors
+      ul
+        for error in errors
+          li!= error.msg

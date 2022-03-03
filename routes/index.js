@@ -30,6 +30,12 @@ router.get('/join', function(req, res) {
 });
 router.post('/join', userController.join);
 
+/* Leave */
+router.get('/leave', function(req, res) {
+  res.render('leave', { title: 'Leave', user: req.user });
+});
+router.post('/leave', userController.leave);
+
 /* Post */
 //router.get('/create-post', function(req, res) {
 //  res.render('/post/create', { title: 'Create Post' });

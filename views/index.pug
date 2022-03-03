@@ -14,3 +14,12 @@ block content
     else if user.status=='Avenger'
       a(href='/leave')
         button Leave
+      a(href='/create-post')
+        button Create Post
+
+  div#posts
+    each post in posts
+      div.post
+        div #{post.title} by #{post.author.username}
+        div #{post.message}
+        div #{post.date}

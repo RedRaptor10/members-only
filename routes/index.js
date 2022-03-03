@@ -3,43 +3,47 @@ var router = express.Router();
 
 // Controller Modules
 var userController = require('../controllers/userController');
+var postController = require('../controllers/postController');
 
-/* Home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'The Avengers', user: req.user });
-});
+// Home Page
+router.get('/', postController.index);
 
-/* Sign Up Form */
+// User Controller
+
+// Sign Up Form
 router.get('/sign-up', function(req, res) {
   res.render('signUp', { title: 'Sign Up', user: req.user });
 });
 router.post('/sign-up', userController.signUp);
 
-/* Log In Form */
+// Log In Form
 router.get('/log-in', function(req, res) {
   res.render('logIn', { title: 'Log in', user: req.user });
 });
 router.post('/log-in', userController.logIn);
 
-/* Log Out */
+// Log Out
 router.get('/log-out', userController.logOut);
 
-/* Join */
+// Join
 router.get('/join', function(req, res) {
   res.render('join', { title: 'Join', user: req.user });
 });
 router.post('/join', userController.join);
 
-/* Leave */
+// Leave
 router.get('/leave', function(req, res) {
   res.render('leave', { title: 'Leave', user: req.user });
 });
 router.post('/leave', userController.leave);
 
-/* Post */
-//router.get('/create-post', function(req, res) {
-//  res.render('/post/create', { title: 'Create Post' });
-//});
+// Post //
+
+// Create
+router.get('/create-post', function(req, res) {
+  res.render('postCreate', { title: 'Create Post', user: req.user });
+});
+router.post('/create-post', postController.create);
 
 //router.get('/update-post', function(req, res) {
 //  res.render('/post/:id/update', { title: 'Update Post' });

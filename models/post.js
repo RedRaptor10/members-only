@@ -5,7 +5,7 @@ var PostSchema = new Schema({
     title: { type: String, minLength: 1, maxLength: 100, required: true },
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     date: { type: Date },
-    text: { type: String, minLength: 1, required: true }
+    message: { type: String, minLength: 1, required: true }
 });
 
 PostSchema

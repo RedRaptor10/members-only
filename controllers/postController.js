@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 exports.index = function(req, res, next) {
     // Find all posts
     Post.find({})
-    .sort({date: 1}) // Sort by date in ascending order
+    .sort({date: -1}) // Sort by date in descending order
     .populate('author')
     .exec(function(err, posts) {
         if (err) { return next(err); }
@@ -43,7 +43,7 @@ exports.create = [
 
                 // // Success. Find all posts and render home page
                 Post.find({})
-                .sort({date: 1}) // Sort by date in ascending order
+                .sort({date: -1}) // Sort by date in descending order
                 .populate('author')
                 .exec(function(err, posts) {
                     if (err) { return next(err); }

@@ -3,22 +3,24 @@ extends layout
 block content
   h1= title
   if !user
-    p You are not logged in.
+    p.user-msg You are not logged in.
   else if user.status=='Avenger' && !message
-    p You are already an Avenger.
+    p.user-msg You are already an Avenger.
   else if message
-    p= message
+    p.user-msg= message
     script.
       setTimeout(function() {
         window.location = '/';
       }, #{delay} * 1000);
   else
-    form(action="" method="POST")
-      label(for="password") Password:
-      input(type="password" name="password")
-      button(type="submit") Submit
-
-    if errors
-      ul
-        for error in errors
-          li!= error.msg
+    p.user-msg Enter the secret password in order to join the Avengers. (Password: assemble)
+    form.form(action="" method="POST")
+      div.form-group
+        label(for="password") Password:
+        input(type="password" name="password")
+      if errors
+        ul.form-errors
+          for error in errors
+            li!= error.msg
+      div.form-group.form-btn-container
+        button.form-btn(type="submit") Submit

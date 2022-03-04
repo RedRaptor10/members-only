@@ -3,21 +3,21 @@ extends layout
 block content
   h1= title
   if !user
-    p You are not logged in.
+    p.user-msg You are not logged in.
   else if user.admin && user.admin=='Admin' && !message
-    p You are already an admin.
+    p.user-msg You are already an admin.
   else if message
-    p= message
+    p.user-msg= message
     script.
       setTimeout(function() {
         window.location = '/';
       }, #{delay} * 1000);
   else
-    form(action="" method="POST")
-      label Do you really want to revoke Admin privileges?
-      button(type="submit") Revoke
-
-    if errors
-      ul
-        for error in errors
-          li!= error.msg
+    p.user-msg Do you really want to revoke Admin privileges?
+    form.form(action="" method="POST")
+      if errors
+        ul.form-errors
+          for error in errors
+            li!= error.msg
+      div.form-group.form-btn-container
+        button.form-btn(type="submit") Revoke

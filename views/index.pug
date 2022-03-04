@@ -3,12 +3,12 @@ extends layout
 block content
   if user
     div#posts-btns
+      a(href='/create-post')
+        button.create-post-btn Create Post
       if user.status=='Member'
         a(href='/join')
           button.join-btn Join Group
       else if user.status=='Avenger'
-        a(href='/create-post')
-          button.create-post-btn Create Post
         a(href='/leave')
           button.leave-btn Leave Group
     div#admin-link

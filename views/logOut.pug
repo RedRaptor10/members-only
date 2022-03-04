@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  p= message
+  p.user-msg= message
   script.
     setTimeout(function() {
       window.location = '/';

@@ -2,22 +2,25 @@ extends layout
 
 block content
   h1= title
-
   if !user.admin || user.admin==false
-    p= message
+    p.user-msg= message
   else
-    div #{post.title}
+    p.user-msg Do you really want to delete this post?
+    div.post
+      // Note: Unescape characters with !{}
+      h1 !{post.title}
       if user && user.status=='Avenger'
-      |  by #{post.author.username}
-      div #{post.message}
+        p.info Posted by 
+          a.author(href="#") #{post.author.username}
+      p.message !{post.message}
       if user && user.status=='Avenger'
-      div #{post.dateFormatted}
+        p.footer
+          span.date #{post.dateFormatted}
 
-    form(action='' method='POST')
-      p Do you really want to delete this post?
-      button(type='submit') Delete
-
-    if errors
-      ul
-        for error in errors
-          li!= error.msg
+    form.form(action='' method='POST')
+      if errors
+        ul.form-errors
+          for error in errors
+            li!= error.msg
+      div.form-group.form-btn-container
+        button.form-btn(type='submit') Delete

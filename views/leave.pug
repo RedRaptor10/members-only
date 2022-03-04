@@ -3,21 +3,21 @@ extends layout
 block content
   h1= title
   if !user
-    p You are not logged in.
+    p.user-msg You are not logged in.
   else if user.status=='Member' && !message
-    p You are already a Member.
+    p.user-msg You are already a Member.
   else if message
-    p= message
+    p.user-msg= message
     script.
       setTimeout(function() {
         window.location = '/';
       }, #{delay} * 1000);
   else
-    form(action="" method="POST")
-      label Do you really want to leave the Avengers?
-      button(type="submit") Leave
-
-    if errors
-      ul
-        for error in errors
-          li!= error.msg
+    p.user-msg Do you really want to leave the Avengers?
+    form.form(action="" method="POST")
+      if errors
+        ul.form-errors
+          for error in errors
+            li!= error.msg
+      div.form-group.form-btn-container
+        button.form-btn(type="submit") Leave

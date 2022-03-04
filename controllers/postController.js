@@ -17,7 +17,7 @@ exports.index = function(req, res, next) {
 exports.create = [
     // Validate and sanitize fields
     body('title').trim().isLength({ min: 1 }).escape().withMessage('Title required.')
-        .isLength({ max: 100 }).escape().withMessage('Title must have 20 characters or less.'),
+        .isLength({ max: 100 }).withMessage('Title must have 20 characters or less.'),
     body('message', 'Message required.').trim().isLength({ min: 1 }).escape(),
 
     // Process Create

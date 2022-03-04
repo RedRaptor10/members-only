@@ -8,7 +8,7 @@ const nconf = require("nconf");
 exports.signUp = [
     // Validate and sanitize fields
     body('username').trim().isLength({ min: 1 }).escape().withMessage('Username required.')
-        .isLength({ max: 20 }).escape().withMessage('Username must have 20 characters or less.'),
+        .isLength({ max: 20 }).withMessage('Username must have 20 characters or less.'),
     body('password', 'Password must contain at least 5 characters.').trim().isLength({ min: 5 }).escape(),
     body('confirmPassword', 'Passwords do not match.').trim().escape().custom((value, { req }) => value === req.body.password),
     body('firstName', 'First Name must have 20 characters or less.').trim().isLength({ max: 20 }).escape(),

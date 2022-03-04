@@ -5,13 +5,20 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     header
-      a(href='/') Home
-      if !user
-        a(href='/sign-up')
-          button Sign Up
-        a(href='/log-in')
-          button Log In
-      else
-        a(href='/log-out')
-          button Log Out
-    block content
+      h1.header-title
+        a(href='/') The Avengers
+      nav.user-nav
+        if user
+          span.username #{user.username}
+          span.status #{user.status}
+          if user.admin && user.admin==true
+            span.admin Admin
+          span
+            a(href='/log-out') Log Out
+        else
+          span
+            a(href='/log-in') Log In 
+          span
+            a(href='/sign-up') Sign Up
+    main
+      block content

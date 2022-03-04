@@ -1,8 +1,223 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* End Reset */
+
+:root {
+  --primary-color: rgb(128, 0, 0);
+  --background-color: rgb(24, 24, 24);
+  --color: rgb(224, 224, 224);
+}
+
+body {
+  background: var(--background-color);
+  color: var(--color);
+  font-family: 'Helvetica', 'Trebuchet MS', 'Arial', 'sans-serif';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: revert;
+}
+
+i, em {
+  font-style: italic;
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(224, 224, 224);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  background: var(--primary-color);
+  padding: 16px;
+  cursor: default;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  font-style: italic;
+}
+
+.header-title a {
+  color: #fff;
+}
+
+.user-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-nav span {
+  padding: 0 16px 0 16px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.user-nav span:not(:last-child) {
+  border-right: 1px solid var(--color);
+}
+
+.user-nav a {
+  transition: 0.1s;
+}
+
+/* Main */
+main {
+  width: 50%;
+  height: 100vh;
+  margin: 0 auto 0 auto;
+  padding: 32px;
+}
+
+/* Home */
+#posts-btns {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+#posts-btns button {
+  background: none;
+  padding: 8px 16px 8px 16px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+#posts-btns a:not(:last-child) {
+  margin-right: 16px;
+}
+
+#posts-btns .create-post-btn {
+  background: rgb(0, 128, 64);
+  transition: 0.1s;
+}
+
+#posts-btns .create-post-btn:hover {
+  background: rgb(32, 156, 96);
+}
+
+#posts-btns .join-btn, #posts-btns .leave-btn {
+  background: rgb(0, 64, 128);
+  transition: 0.1s;
+}
+
+#posts-btns .join-btn:hover, #posts-btns .leave-btn:hover {
+  background: rgb(32, 96, 156);
+}
+
+#admin-link {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+#admin-link a {
+  color: rgb(0, 128, 255);
+  transition: 0.1s;
+}
+
+#admin-link a:hover {
+  color: #fff;
+}
+
+.post {
+  background: rgb(16, 16, 16);
+  height: 192px;
+  margin-bottom: 16px;
+  padding: 32px;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.post a {
+  color: rgb(0, 128, 255);
+  transition: 0.1s;
+}
+
+.post a:hover {
+  color: #fff;
+}
+
+.post .info {
+  padding-top: 16px;
+  font-size: 16px;
+}
+
+.post .message {
+  padding: 16px 0 16px 0;
+  font-size: 20px;
+}
+
+.post .footer {
+  text-align: right;
+  font-size: 16px;
+}
+
+.post .footer a {
+  margin-right: 16px;
+}
+
+.post .date {
+  font-style: italic;
 }

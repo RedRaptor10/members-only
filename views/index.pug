@@ -1,39 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-
   if user
-    p Username: #{user.username}
-    p Status: #{user.status}
-    if user.admin && user.admin==true
-      p Admin
-
-    if user.status=='Member'
-      a(href='/join')
-        button Join
-    else if user.status=='Avenger'
-      a(href='/leave')
-        button Leave
-      a(href='/create-post')
-        button Create Post
-    if !user.admin || user.admin==false
-      a(href='/set-admin')
-        button Become an Admin
-    else if user.admin && user.admin==true
-      a(href='/unset-admin')
-        button Revoke Admin
+    div#posts-btns
+      if user.status=='Member'
+        a(href='/join')
+          button.join-btn Join Group
+      else if user.status=='Avenger'
+        a(href='/create-post')
+          button.create-post-btn Create Post
+        a(href='/leave')
+          button.leave-btn Leave Group
+    div#admin-link
+      if !user.admin || user.admin==false
+        a(href='/set-admin') Become an Admin
+      else if user.admin && user.admin==true
+        a(href='/unset-admin') Revoke Admin
 
   div#posts
     each post in posts
       div.post
-        div #{post.title}
-          if user && user.status=='Avenger'
-            |  by #{post.author.username}
-        div #{post.message}
+        // Note: Unescape characters with !{}
+        h1 !{post.title}
         if user && user.status=='Avenger'
-          div #{post.dateFormatted}
-        if user && user.admin && user.admin==true
-          a(href='/post/' + post._id + '/delete')
-            button Delete
+          p.info Posted by 
+            a.author(href="#") #{post.author.username}
+        p.message !{post.message}
+        if user && user.status=='Avenger'
+          p.footer
+            if user && user.admin && user.admin==true
+              a(href='/post/' + post._id + '/delete') Delete
+            span.date #{post.dateFormatted}

@@ -60,6 +60,7 @@ exports.deleteGET = function(req, res, next) {
         res.render('postDelete', { title: 'Delete Post', user: req.user, message: 'You are not an admin.' });
     } else {
         Post.findOne({_id: req.params.id})
+        .populate('author')
         .exec(function(err, result) {
             if (err) { return next(err); }
             res.render('postDelete', { title: 'Delete Post', user: req.user, post: result });

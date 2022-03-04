@@ -53,3 +53,28 @@ exports.create = [
         }
     }
 ];
+
+// Delete GET
+exports.deleteGET = function(req, res, next) {
+    if (!req.user.admin || req.user.admin == false) {
+        res.render('postDelete', { title: 'Delete Post', user: req.user, message: 'You are not an admin.' });
+    } else {
+        Post.findOne({_id: req.params.id})
+        .exec(function(err, result) {
+            if (err) { return next(err); }
+            res.render('postDelete', { title: 'Delete Post', user: req.user, post: result });
+        });
+    }
+};
+
+// Delete POST
+exports.deletePOST = [
+    (req, res, next) => {
+        const delay = 5;
+        Post.deleteOne({_id: req.params.id})
+        .exec(function(err) {
+            if (err) { return next(err); }
+            res.redirect('/');
+        });
+    }
+];

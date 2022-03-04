@@ -34,3 +34,6 @@ block content
         div #{post.message}
         if user && user.status=='Avenger'
           div #{post.dateFormatted}
+        if user && user.admin && user.admin==true
+          a(href='/post/' + post._id + '/delete')
+            button Delete

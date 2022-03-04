@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+
+  if !user.admin || user.admin==false
+    p= message
+  else
+    div #{post.title}
+      if user && user.status=='Avenger'
+      |  by #{post.author.username}
+      div #{post.message}
+      if user && user.status=='Avenger'
+      div #{post.dateFormatted}
+
+    form(action='' method='POST')
+      p Do you really want to delete this post?
+      button(type='submit') Delete
+
+    if errors
+      ul
+        for error in errors
+          li!= error.msg

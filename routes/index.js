@@ -57,6 +57,10 @@ router.get('/create-post', function(req, res) {
 });
 router.post('/create-post', postController.create);
 
+// Delete
+router.get('/post/:id/delete', postController.deleteGET);
+router.post('/post/:id/delete', postController.deletePOST);
+
 //router.get('/update-post', function(req, res) {
 //  res.render('/post/:id/update', { title: 'Update Post' });
 //});

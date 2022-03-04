@@ -122,10 +122,26 @@ header {
   transition: 0.1s;
 }
 
+/* Footer */
+footer {
+  background: var(--primary-color);
+  padding: 24px;
+  text-align: center;
+}
+
+footer a {
+  text-decoration: underline;
+  transition: 0.1s;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
 /* Main */
 main {
   width: 50%;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto 0 auto;
   padding: 32px;
 }
